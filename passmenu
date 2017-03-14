@@ -1,0 +1,8 @@
+#!/bin/sh
+PASS_ACCOUNT=$(pass ls | sed -e 's/|-- //g' -e 's/\`-- //g' -e 's/├── //g' -e 's/└── //g' -e 's/Password Store//g'| dmenu -p Passmenu -fn "-xos4-terminus-medium-r-*-*-28-*" -b)
+
+if [ $PASS_ACCOUNT ]; then
+	pass show -c $PASS_ACCOUNT
+	notify-send "PASS" "Copied [$PASS_ACCOUNT] to clipboard (timeout in 45 seconds)" -i "dialog-password" -t 20
+fi
+PASS_ACCOUNT=

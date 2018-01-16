@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+PASS_ACCOUNT=$(pass ls | sed -e 's/|-- //g' -e 's/\`-- //g' -e 's/├── //g' -e 's/└── //g' -e 's/Password Store//g'| rofi -show -dmenu -font "DejaVu Sans 12" -color-window "#F6F7F7,#B1C6EA" -color-normal "#F6F7F7,#3A4BD0,#D3DFF1,#738CDD,#F6F7F7" -p "Account")
+
+if [ $PASS_ACCOUNT ]; then
+	pass show -c $PASS_ACCOUNT && notify-send "PASS" "Copied [$PASS_ACCOUNT] to clipboard (timeout in 45 seconds)" -i "dialog-password" -t 1000
+fi
+PASS_ACCOUNT=""

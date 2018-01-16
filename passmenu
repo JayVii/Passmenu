@@ -1,8 +1,7 @@
-#!/bin/sh
-PASS_ACCOUNT=$(pass ls | sed -e 's/|-- //g' -e 's/\`-- //g' -e 's/├── //g' -e 's/└── //g' -e 's/Password Store//g'| dmenu -p Passmenu -fn "-xos4-terminus-medium-r-*-*-28-*" -b)
+#!/usr/bin/env bash
+PASS_ACCOUNT=$(pass ls | sed -e 's/|-- //g' -e 's/\`-- //g' -e 's/├── //g' -e 's/└── //g' -e 's/Password Store//g'| /usr/bin/dmenu -b -i -l 20 -fn "DejaVu Sans 12" -nb "#2c313b" -nf "#cfd6df" -sb "#4f5361" -sf "#000000" -p "Account")
 
 if [ $PASS_ACCOUNT ]; then
-	pass show -c $PASS_ACCOUNT
-	notify-send "PASS" "Copied [$PASS_ACCOUNT] to clipboard (timeout in 45 seconds)" -i "dialog-password" -t 20
+	pass show -c $PASS_ACCOUNT && notify-send "PASS" "Copied [$PASS_ACCOUNT] to clipboard (timeout in 45 seconds)" -i "dialog-password" -t 1000
 fi
-PASS_ACCOUNT=
+PASS_ACCOUNT=""
